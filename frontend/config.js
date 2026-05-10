@@ -20,7 +20,7 @@ const CONFIG = {
         }
         
         // Production - UPDATE THIS WITH YOUR DEPLOYED BACKEND URL
-        return 'https://habitflow-backend.onrender.com/api';
+        return 'https://habitflow-v2-backend.onrender.com/api';
         
         // Alternative: Use environment-specific URLs
         // if (hostname.includes('vercel.app')) {
