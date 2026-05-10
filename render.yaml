@@ -1,0 +1,26 @@
+# Optional: Render Infrastructure as Code
+# This file is NOT required - you can configure everything in Render dashboard
+# Only use this if you want to automate Render setup
+
+services:
+  # Backend API
+  - type: web
+    name: habitflow-backend
+    env: node
+    region: oregon
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SUPABASE_URL
+        sync: false  # Set manually in dashboard
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false  # Set manually in dashboard
+      - key: JWT_SECRET
+        sync: false  # Set manually in dashboard
+      - key: FRONTEND_URL
+        sync: false  # Set manually in dashboard

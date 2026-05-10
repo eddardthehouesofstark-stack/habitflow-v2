@@ -15,7 +15,7 @@ Run this SQL in your **Supabase Dashboard → SQL Editor**:
 ALTER TABLE users ADD COLUMN IF NOT EXISTS is_admin BOOLEAN DEFAULT false;
 
 -- Set YOUR email as admin (REPLACE WITH YOUR ACTUAL EMAIL)
-UPDATE users SET is_admin = true WHERE email = 'pragad555990@gmail.com';
+UPDATE users SET is_admin = true WHERE email = 'eddardthehouesofstatk@gmail.com';
 ```
 
 ### 2. Restart Your Backend Server
@@ -79,5 +79,5 @@ UPDATE users SET is_admin = false WHERE email = 'their-email@example.com';
 
 ---
 
-**Your Admin Email**: pragad555990@gmail.com  
+**Your Admin Email**: eddardthehouesofstatk@gmail.com  
 **Access Level**: Full platform statistics and user management

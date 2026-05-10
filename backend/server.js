@@ -6,7 +6,33 @@ const { createClient } = require('@supabase/supabase-js');
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+
+// ─── CORS CONFIGURATION ───
+const allowedOrigins = process.env.NODE_ENV === 'production'
+    ? [
+        process.env.FRONTEND_URL || 'https://habitflow.vercel.app',
+        'https://habitflow.netlify.app',
+        // Add your custom domain here
+    ]
+    : ['http://localhost:8000', 'http://127.0.0.1:8000', 'http://localhost:5500'];
+
+app.use(cors({
+    origin: function(origin, callback) {
+        // Allow requests with no origin (mobile apps, Postman, etc.)
+        if (!origin) return callback(null, true);
+        
+        if (allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            console.warn(`Blocked by CORS: ${origin}`);
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 
 // ─── SUPABASE ───
@@ -15,8 +41,22 @@ const supabase = createClient(
     process.env.SUPABASE_SERVICE_ROLE_KEY  // use service role key on backend (bypasses RLS)
 );
 
-const JWT_SECRET = process.env.JWT_SECRET || 'change-this-secret';
-const PORT = process.env.PORT || 3000;
+const JWT_SECRET = process.env.JWT_SECRET || 'change-this-secret-in-production';
+const PORT = process.env.PORT || 3002;
+
+// ─── SECURITY HEADERS ───
+app.use((req, res, next) => {
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'DENY');
+    res.setHeader('X-XSS-Protection', '1; mode=block');
+    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+    next();
+});
+
+// ─── HEALTH CHECK ───
+app.get('/health', (req, res) => {
+    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
 
 // ─── MIDDLEWARE: auth guard ───
 function authGuard(req, res, next) {

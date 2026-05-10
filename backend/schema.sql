@@ -82,4 +82,4 @@ alter table habit_logs enable row level security;
 alter table users add column if not exists is_admin boolean default false;
 
 -- Set your email as admin (REPLACE WITH YOUR EMAIL)
-update users set is_admin = true where email = 'pragad555990@gmail.com';
+update users set is_admin = true where email = 'eddardthehouesofstatk@gmail.com';
