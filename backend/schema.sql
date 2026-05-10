@@ -53,12 +53,11 @@ create index if not exists idx_habit_logs_user_id on habit_logs(user_id);
 -- This cron job deletes old "done=false" ghost rows to keep the table clean
 -- The real reset happens naturally: each new day has no log row yet = undone
 select cron.schedule(
-  'habitflow-daily-cleanup',
+  'habitflow-daily-reset',
   '30 18 * * *',  -- every day at 18:30 UTC (midnight IST)
   $$
     delete from habit_logs
-    where done = false
-    and log_date < current_date;
+    where log_date < current_date;
   $$
 );
 
