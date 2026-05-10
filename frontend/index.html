@@ -3371,7 +3371,8 @@
     </div>
 
     <script>
-        const API = 'http://localhost:3002/api';
+        // Use config.js for API URL (auto-detects dev/prod)
+        const API = window.HABITFLOW_CONFIG?.API_BASE_URL || 'https://habitflow-v2-backend.onrender.com/api';
         let token = localStorage.getItem('hf_token') || null;
         let currentUser = null;
         let habits = [];
