@@ -3,6 +3,7 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { createClient } = require('@supabase/supabase-js');
+const WebSocket = require('ws');
 require('dotenv').config();
 
 const app = express();
@@ -38,7 +39,15 @@ app.use(express.json());
 // ─── SUPABASE ───
 const supabase = createClient(
     process.env.SUPABASE_URL,
-    process.env.SUPABASE_SERVICE_ROLE_KEY  // use service role key on backend (bypasses RLS)
+    process.env.SUPABASE_SERVICE_ROLE_KEY,  // use service role key on backend (bypasses RLS)
+    {
+        global: {
+            fetch: fetch,
+        },
+        realtime: {
+            transport: WebSocket
+        }
+    }
 );
 
 const JWT_SECRET = process.env.JWT_SECRET || 'change-this-secret-in-production';
