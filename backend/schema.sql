@@ -54,7 +54,7 @@ create index if not exists idx_habit_logs_user_id on habit_logs(user_id);
 -- The real reset happens naturally: each new day has no log row yet = undone
 select cron.schedule(
   'habitflow-daily-cleanup',
-  '0 0 * * *',  -- every day at midnight UTC
+  '30 18 * * *',  -- every day at 18:30 UTC (midnight IST)
   $$
     delete from habit_logs
     where done = false
