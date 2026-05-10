@@ -12,6 +12,7 @@ const app = express();
 const allowedOrigins = process.env.NODE_ENV === 'production'
     ? [
         process.env.FRONTEND_URL || 'https://habitflow.vercel.app',
+        'https://habitflow-v2.vercel.app',  // Your actual frontend
         'https://habitflow.netlify.app',
         // Add your custom domain here
     ]
