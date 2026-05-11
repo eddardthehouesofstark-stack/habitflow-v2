@@ -2825,6 +2825,9 @@
                         <input type="password" id="password-input" placeholder="••••••••" required minlength="6" />
                     </div>
                     <div class="auth-err" id="auth-err"></div>
+                    <div style="font-size: 0.85rem; color: #888; text-align: center; margin: 10px 0;">
+                        ⏱️ First login may take 30-60 seconds (free server waking up)
+                    </div>
                     <button type="submit" class="btn-primary" id="auth-submit">Sign in</button>
                 </form>
             </div>
@@ -3547,7 +3550,14 @@
             const password = document.getElementById('password-input').value;
             const name = document.getElementById('name-input').value.trim();
             const errEl = document.getElementById('auth-err');
+            const submitBtn = e.target.querySelector('button[type="submit"]');
             errEl.style.display = 'none';
+
+            // Show loading state
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = authMode === 'login' ? 'Signing in...' : 'Creating account...';
+            submitBtn.style.opacity = '0.7';
 
             const endpoint = authMode === 'login' ? '/auth/login' : '/auth/signup';
             const body = authMode === 'login' ? { email, password } : { email, password, name };
@@ -3576,8 +3586,13 @@
                 showApp();
             } catch (err) {
                 console.error('Login error:', err);
-                errEl.textContent = err.message || 'Cannot connect to server. Make sure backend is running on port 3002.';
+                errEl.textContent = err.message || 'Failed to fetch';
                 errEl.style.display = 'block';
+                
+                // Reset button state on error
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+                submitBtn.style.opacity = '1';
             }
         }
 
