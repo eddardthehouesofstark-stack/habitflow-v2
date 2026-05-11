@@ -3662,6 +3662,7 @@
                 habits = data.habits || [];
                 renderHabits();
                 updateStats();
+                loadStreakAndYearStats(); // Load streak and year data
             } catch { showToast('Failed to load habits'); }
         }
 
@@ -3686,6 +3687,42 @@
         function updateStats() {
             const done = habits.filter(h => h.done).length;
             document.getElementById('stat-today').textContent = `${done}/${habits.length}`;
+            // Streak and year stats are loaded separately from backend
+        }
+
+        async function loadStreakAndYearStats() {
+            try {
+                // Get year logs for visualization
+                const yearRes = await authFetch('/habits/logs/year');
+                const yearData = await yearRes.json();
+                
+                // Calculate streak from year data
+                let streak = 0;
+                const today = new Date();
+                const startOfYear = new Date(today.getFullYear(), 0, 1);
+                const dayOfYear = Math.floor((today - startOfYear) / 86400000) + 1;
+                
+                // Count consecutive days backwards from yesterday
+                for (let i = dayOfYear - 1; i >= 1; i--) {
+                    if (yearData.logs[i] === 'done') {
+                        streak++;
+                    } else {
+                        break; // Streak broken
+                    }
+                }
+                
+                // Count total days completed this year
+                const daysCompleted = Object.values(yearData.logs).filter(v => v === 'done').length;
+                
+                // Update UI
+                document.getElementById('stat-streak').textContent = streak;
+                document.getElementById('stat-year').textContent = daysCompleted;
+                
+                // Render year visualization
+                renderYearGrid(yearData.logs);
+            } catch (err) {
+                console.error('Failed to load streak/year stats:', err);
+            }
         }
 
         async function toggleHabit(id, currentDone) {
@@ -3694,6 +3731,7 @@
             try {
                 await authFetch(`/habits/${id}/toggle`, { method: 'POST', body: JSON.stringify({ done: !currentDone }) });
                 showToast(!currentDone ? '✓ Done!' : 'Marked undone');
+                loadStreakAndYearStats(); // Update streak after toggling
             } catch { habits = habits.map(h => h.id === id ? { ...h, done: currentDone } : h); renderHabits(); updateStats(); }
         }
 
