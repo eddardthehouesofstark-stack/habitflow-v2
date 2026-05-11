@@ -4062,13 +4062,39 @@
 
         async function deleteHabit(e, id) {
             e.stopPropagation();
-            if (!confirm('Delete this habit?')) return;
+            console.log('Delete habit called with id:', id);
+            
+            if (!confirm('Delete this habit?')) {
+                console.log('Delete cancelled by user');
+                return;
+            }
+            
+            console.log('Deleting habit:', id);
+            
+            // Optimistically remove from UI
             habits = habits.filter(h => h.id !== id);
-            renderHabits(); updateStats();
+            renderHabits(); 
+            updateStats();
+            
             try {
-                await authFetch(`/habits/${id}`, { method: 'DELETE' });
+                console.log('Sending DELETE request to:', `/habits/${id}`);
+                const res = await authFetch(`/habits/${id}`, { method: 'DELETE' });
+                
+                if (!res.ok) {
+                    throw new Error('Failed to delete habit');
+                }
+                
+                console.log('Habit deleted successfully');
                 showToast('Habit deleted');
-            } catch { loadHabits(); }
+                
+                // Reload to ensure sync
+                await loadHabits();
+            } catch (err) {
+                console.error('Error deleting habit:', err);
+                showToast('Failed to delete habit');
+                // Reload habits to restore state
+                await loadHabits();
+            }
         }
 
         // ─── YEAR GRID ───
