@@ -2629,6 +2629,57 @@
             transform: translateX(-50%) translateY(0);
         }
 
+        /* ═══════════════════════════════════════════════
+           RESPONSIVE DESIGN - Mobile & Tablet
+           ═══════════════════════════════════════════════ */
+        
+        /* Tablet (768px and below) */
+        @media (max-width: 768px) {
+            .topbar {
+                padding: 0 20px;
+                flex-wrap: wrap;
+            }
+            
+            .topbar nav {
+                order: 3;
+                width: 100%;
+                margin-top: 10px;
+                justify-content: center;
+            }
+            
+            .topbar nav a {
+                font-size: 0.85rem;
+                padding: 8px 12px;
+            }
+            
+            .page {
+                padding: 20px 16px;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            
+            .stat-card {
+                padding: 16px;
+            }
+            
+            .year-grid {
+                gap: 2px;
+            }
+            
+            .year-day {
+                width: 8px;
+                height: 8px;
+            }
+        }
+
+        /* Mobile (720px and below) */
         @media (max-width: 720px) {
             #auth-page {
                 grid-template-columns: 1fr;
@@ -2648,10 +2699,234 @@
 
             .topbar {
                 padding: 0 16px;
+                height: auto;
+                min-height: 60px;
+            }
+            
+            .topbar-logo {
+                font-size: 1.2rem;
+            }
+            
+            .topbar nav {
+                gap: 8px;
+            }
+            
+            .topbar nav a {
+                font-size: 0.8rem;
+                padding: 6px 10px;
             }
 
             .stats-row {
                 grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            
+            .stat-card {
+                padding: 14px;
+            }
+            
+            .stat-card .value {
+                font-size: 2rem;
+            }
+            
+            .stat-card .label {
+                font-size: 0.7rem;
+            }
+            
+            .stat-card .sub {
+                font-size: 0.75rem;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .page-header .date {
+                font-size: 0.9rem;
+            }
+            
+            .habit-item {
+                padding: 14px;
+            }
+            
+            .habit-item .habit-name {
+                font-size: 0.95rem;
+            }
+            
+            .habit-item .habit-time {
+                font-size: 0.75rem;
+            }
+            
+            .year-section {
+                padding: 16px;
+            }
+            
+            .year-grid {
+                gap: 1.5px;
+            }
+            
+            .year-day {
+                width: 6px;
+                height: 6px;
+            }
+            
+            .project-card {
+                padding: 16px;
+            }
+            
+            .social-links {
+                gap: 12px;
+            }
+            
+            .social-links a {
+                width: 35px;
+                height: 35px;
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Small Mobile (480px and below) */
+        @media (max-width: 480px) {
+            .topbar {
+                flex-direction: column;
+                padding: 12px 16px;
+                gap: 10px;
+            }
+            
+            .topbar-logo {
+                font-size: 1.1rem;
+            }
+            
+            .topbar nav {
+                width: 100%;
+                justify-content: space-around;
+                margin-top: 0;
+            }
+            
+            .topbar nav a {
+                font-size: 0.75rem;
+                padding: 6px 8px;
+            }
+            
+            .user-menu {
+                position: absolute;
+                top: 12px;
+                right: 16px;
+            }
+            
+            .page {
+                padding: 16px 12px;
+            }
+            
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .page-header .date {
+                font-size: 0.85rem;
+            }
+            
+            .stats-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .stat-card {
+                padding: 16px;
+            }
+            
+            .stat-card .value {
+                font-size: 2.5rem;
+            }
+            
+            .year-section {
+                padding: 12px;
+            }
+            
+            .year-section h3 {
+                font-size: 0.8rem;
+            }
+            
+            .year-grid {
+                gap: 1px;
+                padding: 8px;
+            }
+            
+            .year-day {
+                width: 4px;
+                height: 4px;
+            }
+            
+            .habit-item {
+                padding: 12px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .habit-left {
+                width: 100%;
+            }
+            
+            .habit-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .new-habit-form {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .new-habit-form input {
+                width: 100%;
+            }
+            
+            .new-habit-form button {
+                width: 100%;
+            }
+            
+            .auth-form input {
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+            
+            .social-links {
+                gap: 10px;
+            }
+            
+            .social-links a {
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
+            }
+            
+            .project-card {
+                padding: 14px;
+            }
+            
+            .admin-stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Extra Small Mobile (360px and below) */
+        @media (max-width: 360px) {
+            .page-header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .topbar nav a {
+                font-size: 0.7rem;
+                padding: 5px 6px;
+            }
+            
+            .stat-card .value {
+                font-size: 2rem;
+            }
+            
+            .year-day {
+                width: 3px;
+                height: 3px;
             }
         }
     </style>
