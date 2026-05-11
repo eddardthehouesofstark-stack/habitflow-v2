@@ -1410,15 +1410,18 @@
             border: none;
             border-radius: 16px;
             padding: 0;
-            transition: transform 0.3s;
             position: relative;
             overflow: visible;
             cursor: pointer;
             height: 320px;
             transform-style: preserve-3d;
+            perspective: 1000px;
+            /* Hardware acceleration */
+            will-change: transform;
+            transform: translateZ(0);
         }
 
-        .feature-card:hover {
+        .feature-card:hover .feature-card-inner {
             transform: rotateY(180deg);
         }
 
@@ -1427,7 +1430,11 @@
             width: 100%;
             height: 100%;
             transform-style: preserve-3d;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Optimized transition - smoother easing */
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Hardware acceleration */
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .feature-card-front,
@@ -1436,12 +1443,16 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
             border-radius: 16px;
             padding: 32px 28px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             overflow: hidden;
+            /* Hardware acceleration */
+            transform: translateZ(0);
         }
 
         /* Front Side */
@@ -1450,6 +1461,7 @@
             flex-direction: column;
             align-items: flex-start;
             justify-content: center;
+            transform: rotateY(0deg);
         }
 
         .feature-card-front::before {
@@ -1461,7 +1473,8 @@
             height: 100%;
             background: radial-gradient(circle at top left, rgba(74, 158, 255, 0.15) 0%, transparent 60%);
             opacity: 0;
-            transition: opacity 0.4s;
+            transition: opacity 0.3s ease;
+            will-change: opacity;
         }
 
         .feature-card:hover .feature-card-front::before {
@@ -1477,17 +1490,18 @@
             height: 200%;
             background: radial-gradient(circle, rgba(74, 158, 255, 0.3) 0%, transparent 50%);
             opacity: 0;
-            transition: all 0.6s;
+            transition: opacity 0.4s ease;
             animation: glow-pulse 3s ease-in-out infinite;
+            will-change: transform, opacity;
         }
 
         @keyframes glow-pulse {
             0%, 100% {
-                transform: scale(1);
+                transform: scale(1) translateZ(0);
                 opacity: 0;
             }
             50% {
-                transform: scale(1.2);
+                transform: scale(1.2) translateZ(0);
                 opacity: 0.3;
             }
         }
@@ -1515,6 +1529,7 @@
             width: 100%;
             height: 100%;
             background: radial-gradient(circle at center, rgba(74, 158, 255, 0.2) 0%, transparent 70%);
+            will-change: transform;
         }
 
         .feature-card-back::after {
@@ -1525,8 +1540,9 @@
             width: 300px;
             height: 300px;
             background: radial-gradient(circle, rgba(74, 158, 255, 0.4) 0%, transparent 60%);
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) translateZ(0);
             animation: rotate-glow 8s linear infinite;
+            will-change: transform;
         }
 
         @keyframes rotate-glow {
