@@ -1167,20 +1167,32 @@
         }
 
         .habit-del {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.3);
-            background: none;
-            border: none;
+            font-size: 20px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             cursor: pointer;
-            padding: 2px 6px;
-            border-radius: 3px;
-            transition: all 0.15s;
+            padding: 4px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
             line-height: 1;
+            min-width: 32px;
+            min-height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .habit-del:hover {
-            color: #ff6b6b;
-            background: rgba(255, 107, 107, 0.1);
+            color: #fff;
+            background: rgba(255, 107, 107, 0.8);
+            border-color: #ff6b6b;
+            transform: scale(1.05);
+        }
+
+        .habit-del:active {
+            transform: scale(0.95);
         }
 
         /* add habit form */
@@ -2904,6 +2916,13 @@
             
             .auth-form input {
                 font-size: 16px; /* Prevents zoom on iOS */
+            }
+            
+            .habit-del {
+                min-width: 40px;
+                min-height: 40px;
+                font-size: 22px;
+                padding: 8px 12px;
             }
             
             .social-links {
