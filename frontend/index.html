@@ -1232,16 +1232,16 @@
         .habit-edit {
             font-size: 16px;
             font-weight: bold;
-            color: rgba(255, 255, 255, 0.5);
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            background: rgba(74, 158, 255, 0.1);
+            border: 1px solid rgba(74, 158, 255, 0.2);
             cursor: pointer;
-            padding: 4px 10px;
-            border-radius: 6px;
-            transition: all 0.2s ease;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             line-height: 1;
-            min-width: 32px;
-            min-height: 32px;
+            min-width: 36px;
+            min-height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1249,13 +1249,53 @@
 
         .habit-edit:hover {
             color: #fff;
-            background: rgba(74, 158, 255, 0.8);
+            background: rgba(74, 158, 255, 0.25);
             border-color: #4a9eff;
-            transform: scale(1.05);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 12px rgba(74, 158, 255, 0.3);
         }
 
         .habit-edit:active {
-            transform: scale(0.95);
+            transform: translateY(0) scale(0.98);
+        }
+
+        .habit-edit svg {
+            filter: drop-shadow(0 0 4px rgba(74, 158, 255, 0.5));
+        }
+
+        /* Delete button - improved */
+        .habit-del {
+            font-size: 20px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.2);
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1;
+            min-width: 36px;
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .habit-del:hover {
+            color: #fff;
+            background: rgba(255, 107, 107, 0.25);
+            border-color: #ff6b6b;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+
+        .habit-del:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .habit-del svg {
+            filter: drop-shadow(0 0 4px rgba(255, 107, 107, 0.5));
         }
 
         /* Habit action buttons container */
@@ -1267,13 +1307,29 @@
 
         /* Edit mode styling */
         .habit-item.editing {
-            background: rgba(74, 158, 255, 0.1);
-            border-color: rgba(74, 158, 255, 0.3);
+            background: linear-gradient(135deg, rgba(74, 158, 255, 0.15) 0%, rgba(74, 158, 255, 0.08) 100%);
+            border-color: rgba(74, 158, 255, 0.4);
+            box-shadow: 
+                0 8px 32px rgba(74, 158, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: editPulse 0.3s ease-out;
+        }
+
+        @keyframes editPulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
 
         .habit-item.editing .habit-check {
             pointer-events: none;
-            opacity: 0.5;
+            opacity: 0.4;
         }
 
         .habit-edit-form {
@@ -1285,68 +1341,105 @@
 
         .habit-edit-input {
             flex: 1;
-            padding: 8px 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
             color: #fff;
-            font-size: 14px;
+            font-size: 15px;
             font-family: var(--sans);
+            font-weight: 500;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .habit-edit-input:focus {
             outline: none;
             border-color: #4a9eff;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 0 0 4px rgba(74, 158, 255, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .habit-edit-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
         }
 
         .habit-edit-time {
-            width: 90px;
-            padding: 8px 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
+            width: 100px;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
             color: #fff;
             font-size: 14px;
             font-family: var(--sans);
+            font-weight: 500;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .habit-edit-time:focus {
             outline: none;
             border-color: #4a9eff;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 0 0 4px rgba(74, 158, 255, 0.15);
+            transform: translateY(-1px);
+        }
+
+        /* Color scheme for time input */
+        .habit-edit-time::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
         }
 
         .habit-save-btn,
         .habit-cancel-btn {
-            padding: 6px 12px;
-            border-radius: 6px;
+            padding: 8px 14px;
+            border-radius: 8px;
             border: none;
             cursor: pointer;
             font-size: 13px;
             font-weight: 600;
-            transition: all 0.2s;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             font-family: var(--sans);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            min-width: 36px;
+            min-height: 36px;
         }
 
         .habit-save-btn {
-            background: #4a9eff;
+            background: linear-gradient(135deg, #4a9eff 0%, #357abd 100%);
             color: #fff;
+            box-shadow: 0 2px 8px rgba(74, 158, 255, 0.3);
         }
 
         .habit-save-btn:hover {
-            background: #357abd;
-            transform: scale(1.05);
+            background: linear-gradient(135deg, #357abd 0%, #2a5f99 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(74, 158, 255, 0.5);
+        }
+
+        .habit-save-btn:active {
+            transform: translateY(0);
         }
 
         .habit-cancel-btn {
-            background: rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .habit-cancel-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.12);
             color: #fff;
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .habit-cancel-btn:active {
+            transform: translateY(0);
         }
 
         /* add habit form */
@@ -4158,28 +4251,71 @@
             }, 100);
         }
 
+        // ─── EDIT HABIT FUNCTION ───
         function editHabit(e, id) {
             e.stopPropagation();
-            console.log('Edit habit clicked:', id);
-            // Set editing flag on the habit
-            habits = habits.map(h => h.id === id ? { ...h, editing: true } : { ...h, editing: false });
-            console.log('Habits after edit:', habits);
+            
+            // Close any other editing habits
+            habits = habits.map(h => {
+                if (h.id === id) {
+                    // Store original values for cancel functionality
+                    return { 
+                        ...h, 
+                        editing: true,
+                        _originalName: h.name,
+                        _originalTime: h.time
+                    };
+                }
+                return { ...h, editing: false };
+            });
+            
             renderHabits();
+            
+            // Focus on the name input after render
+            setTimeout(() => {
+                const input = document.getElementById(`edit-name-${id}`);
+                if (input) {
+                    input.focus();
+                    input.select();
+                }
+            }, 50);
         }
 
+        // ─── SAVE HABIT EDIT ───
         async function saveHabitEdit(e, id) {
             e.stopPropagation();
             
             const nameInput = document.getElementById(`edit-name-${id}`);
             const timeInput = document.getElementById(`edit-time-${id}`);
             
+            if (!nameInput || !timeInput) {
+                showToast('⚠️ Error: Input fields not found');
+                return;
+            }
+            
             const newName = nameInput.value.trim();
             const newTime = timeInput.value;
             
+            // Validation
             if (!newName) {
-                showToast('Habit name cannot be empty');
+                showToast('⚠️ Habit name cannot be empty');
+                nameInput.focus();
                 return;
             }
+            
+            // Store original values for rollback
+            const originalHabit = habits.find(h => h.id === id);
+            const originalName = originalHabit._originalName;
+            const originalTime = originalHabit._originalTime;
+            
+            // Optimistic update - update UI immediately
+            habits = habits.map(h => 
+                h.id === id 
+                    ? { ...h, name: newName, time: newTime, editing: false }
+                    : h
+            );
+            renderHabits();
+            showToast('💾 Saving...');
             
             try {
                 const res = await authFetch(`/habits/${id}`, {
@@ -4191,22 +4327,40 @@
                     throw new Error('Failed to update habit');
                 }
                 
-                const data = await res.json();
+                // Success!
+                showToast('✅ Habit updated!');
                 
-                // Update local state
-                habits = habits.map(h => h.id === id ? { ...h, name: newName, time: newTime, editing: false } : h);
-                renderHabits();
-                showToast('Habit updated!');
             } catch (err) {
                 console.error('Error updating habit:', err);
-                showToast('Failed to update habit');
+                
+                // Rollback on error
+                habits = habits.map(h => 
+                    h.id === id 
+                        ? { ...h, name: originalName, time: originalTime, editing: false }
+                        : h
+                );
+                renderHabits();
+                showToast('❌ Failed to update habit');
             }
         }
 
+        // ─── CANCEL HABIT EDIT ───
         function cancelHabitEdit(e, id) {
             e.stopPropagation();
-            // Remove editing flag
-            habits = habits.map(h => h.id === id ? { ...h, editing: false } : h);
+            
+            // Restore original values
+            habits = habits.map(h => {
+                if (h.id === id) {
+                    return {
+                        ...h,
+                        name: h._originalName || h.name,
+                        time: h._originalTime || h.time,
+                        editing: false
+                    };
+                }
+                return h;
+            });
+            
             renderHabits();
         }
 
@@ -4239,10 +4393,10 @@
             }
             list.innerHTML = habits.map(h => {
                 if (h.editing) {
-                    // Edit mode
+                    // Edit mode - inline editing form
                     return `
-                        <div class="habit-item editing">
-                            <div class="habit-check">${h.done ? '✓' : ''}</div>
+                        <div class="habit-item editing" data-habit-id="${h.id}">
+                            <div class="habit-check" style="opacity: 0.5;">${h.done ? '✓' : ''}</div>
                             <div class="habit-edit-form">
                                 <input 
                                     type="text" 
@@ -4250,37 +4404,66 @@
                                     id="edit-name-${h.id}" 
                                     value="${escHtml(h.name)}"
                                     placeholder="Habit name"
+                                    onkeydown="if(event.key==='Enter') saveHabitEdit(event, '${h.id}'); if(event.key==='Escape') cancelHabitEdit(event, '${h.id}');"
                                 />
                                 <input 
                                     type="time" 
                                     class="habit-edit-time" 
                                     id="edit-time-${h.id}" 
                                     value="${h.time || ''}"
+                                    onkeydown="if(event.key==='Enter') saveHabitEdit(event, '${h.id}'); if(event.key==='Escape') cancelHabitEdit(event, '${h.id}');"
                                 />
                             </div>
                             <div class="habit-actions">
-                                <button class="habit-save-btn" onclick="saveHabitEdit(event, '${h.id}')">Save</button>
-                                <button class="habit-cancel-btn" onclick="cancelHabitEdit(event, '${h.id}')">Cancel</button>
+                                <button class="habit-save-btn" onclick="saveHabitEdit(event, '${h.id}')" title="Save (Enter)">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </button>
+                                <button class="habit-cancel-btn" onclick="cancelHabitEdit(event, '${h.id}')" title="Cancel (Esc)">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
                     `;
                 } else {
-                    // Normal mode
+                    // Normal mode - display habit
                     return `
-                        <div class="habit-item ${h.done ? 'done' : ''}" onclick="toggleHabit('${h.id}', ${h.done})">
+                        <div class="habit-item ${h.done ? 'done' : ''}" data-habit-id="${h.id}" onclick="toggleHabit('${h.id}', ${h.done})">
                             <div class="habit-check">${h.done ? '✓' : ''}</div>
                             <div class="habit-info">
                                 <div class="habit-name">${escHtml(h.name)}</div>
                                 ${h.time ? `<div class="habit-time">${h.time}</div>` : ''}
                             </div>
                             <div class="habit-actions">
-                                <button class="habit-edit" onclick="editHabit(event, '${h.id}')" title="Edit habit">✏️</button>
-                                <button class="habit-del" onclick="deleteHabit(event,'${h.id}')" title="Delete habit">×</button>
+                                <button class="habit-edit" onclick="editHabit(event, '${h.id}')" title="Edit habit">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                    </svg>
+                                </button>
+                                <button class="habit-del" onclick="deleteHabit(event,'${h.id}')" title="Delete habit">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
                     `;
                 }
             }).join('');
+            
+            // Add fade-in animation to new items
+            const items = list.querySelectorAll('.habit-item');
+            items.forEach((item, index) => {
+                item.style.animation = `fadeInUp 0.3s ease-out ${index * 0.05}s both`;
+            });
         }
 
         function updateStats() {
@@ -4349,40 +4532,57 @@
             } catch { showToast('Failed to add habit'); }
         }
 
+        // ─── DELETE HABIT FUNCTION ───
         async function deleteHabit(e, id) {
             e.stopPropagation();
-            console.log('Delete habit called with id:', id);
             
-            if (!confirm('Delete this habit?')) {
-                console.log('Delete cancelled by user');
-                return;
+            // Find the habit element for animation
+            const habitElement = e.target.closest('.habit-item');
+            
+            // Store original habit for rollback
+            const originalHabit = habits.find(h => h.id === id);
+            if (!originalHabit) return;
+            
+            // Add deleting animation class
+            if (habitElement) {
+                habitElement.style.transition = 'all 0.3s ease-out';
+                habitElement.style.opacity = '0.5';
+                habitElement.style.transform = 'scale(0.95)';
+                habitElement.style.pointerEvents = 'none';
             }
             
-            console.log('Deleting habit:', id);
+            // Wait a moment for visual feedback
+            await new Promise(resolve => setTimeout(resolve, 150));
             
-            // Optimistically remove from UI
+            // Optimistic delete - remove from UI immediately
+            const originalHabits = [...habits];
             habits = habits.filter(h => h.id !== id);
-            renderHabits(); 
+            renderHabits();
             updateStats();
             
+            showToast('🗑️ Deleting...');
+            
             try {
-                console.log('Sending DELETE request to:', `/habits/${id}`);
                 const res = await authFetch(`/habits/${id}`, { method: 'DELETE' });
                 
                 if (!res.ok) {
                     throw new Error('Failed to delete habit');
                 }
                 
-                console.log('Habit deleted successfully');
-                showToast('Habit deleted');
+                // Success!
+                showToast('✅ Habit deleted');
                 
-                // Reload to ensure sync
-                await loadHabits();
+                // Update streak and year stats
+                loadStreakAndYearStats();
+                
             } catch (err) {
                 console.error('Error deleting habit:', err);
-                showToast('Failed to delete habit');
-                // Reload habits to restore state
-                await loadHabits();
+                
+                // Rollback on error - restore the habit
+                habits = originalHabits;
+                renderHabits();
+                updateStats();
+                showToast('❌ Failed to delete habit');
             }
         }
 
