@@ -4,9 +4,17 @@
     {
       "src": "frontend/index.html",
       "use": "@vercel/static"
+    },
+    {
+      "src": "frontend/logo.png",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
+    {
+      "src": "/logo.png",
+      "dest": "/frontend/logo.png"
+    },
     {
       "src": "/(.*)",
       "dest": "/frontend/$1"
