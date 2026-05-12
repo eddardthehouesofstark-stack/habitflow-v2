@@ -4318,7 +4318,7 @@
                 document.getElementById('stat-year').textContent = daysCompleted;
                 
                 // Render year visualization
-                renderYearGrid(yearData.logs);
+                buildYearGrid();
             } catch (err) {
                 console.error('Failed to load streak/year stats:', err);
             }
