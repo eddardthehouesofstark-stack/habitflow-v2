@@ -50,14 +50,16 @@ create index if not exists idx_habit_logs_user_id on habit_logs(user_id);
 --  Supabase Dashboard → Extensions → search "pg_cron" → Enable
 -- ═══════════════════════════════════════════════
 
--- This cron job deletes old "done=false" ghost rows to keep the table clean
--- The real reset happens naturally: each new day has no log row yet = undone
+-- This cron job deletes old uncompleted logs to keep the table clean
+-- IMPORTANT: Completed logs (done=true) are PRESERVED for streak and year tracking!
+-- Only uncompleted logs from previous days are deleted
 select cron.schedule(
   'habitflow-daily-reset',
   '30 18 * * *',  -- every day at 18:30 UTC (midnight IST)
   $$
     delete from habit_logs
-    where log_date < current_date;
+    where log_date < current_date
+    and done = false;
   $$
 );
 
