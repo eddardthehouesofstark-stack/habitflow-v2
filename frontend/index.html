@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HabitFlow — Build your year</title>
+    <link rel="icon" type="image/png" href="logo.png" />
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap"
         rel="stylesheet" />
@@ -190,18 +191,22 @@
         }
 
         .auth-brand {
-            font-family: var(--sans);
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
             position: relative;
             z-index: 1;
-            text-transform: none;
+            display: flex;
+            align-items: center;
         }
 
-        .auth-brand span {
-            color: #ff6b6b;
-            font-weight: 700;
+        .auth-brand img {
+            height: 60px;
+            width: auto;
+            display: block;
+            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.3));
+            transition: transform 0.3s;
+        }
+
+        .auth-brand img:hover {
+            transform: scale(1.05);
         }
 
         .auth-hero {
@@ -587,16 +592,20 @@
         }
 
         .topbar-brand {
-            font-family: var(--sans);
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: -0.2px;
-            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0;
         }
 
-        .topbar-brand span {
-            color: #4a9eff;
-            font-weight: 700;
+        .topbar-brand img {
+            height: 40px;
+            width: auto;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .topbar-brand img:hover {
+            transform: scale(1.05);
         }
 
         .topbar-nav {
@@ -2667,6 +2676,14 @@
                 padding: 0 20px;
                 flex-wrap: wrap;
             }
+
+            .topbar-brand img {
+                height: 36px;
+            }
+
+            .auth-brand img {
+                height: 50px;
+            }
             
             .topbar nav {
                 order: 3;
@@ -2729,6 +2746,14 @@
                 padding: 0 16px;
                 height: auto;
                 min-height: 60px;
+            }
+            
+            .topbar-brand img {
+                height: 32px;
+            }
+
+            .auth-brand img {
+                height: 45px;
             }
             
             .topbar-logo {
@@ -3079,7 +3104,9 @@
         <div class="auth-left">
             <canvas id="stars-canvas"></canvas>
             <div class="floating-particles" id="floating-particles"></div>
-            <div class="auth-brand">Habit<span>Flow</span></div>
+            <div class="auth-brand">
+                <img src="logo.png" alt="HabitFlow" />
+            </div>
             <div class="auth-hero">
                 <h1>Build your <em>year</em>, one day at a time.</h1>
                 <p>Check off your daily routine every single day. Watch your year fill up with green. Share your
@@ -3148,7 +3175,9 @@
     <div id="app-page">
         <div id="vanta-bg"></div>
         <nav class="topbar">
-            <div class="topbar-brand">Habit<span>Flow</span></div>
+            <div class="topbar-brand">
+                <img src="logo.png" alt="HabitFlow" />
+            </div>
             <div class="topbar-nav">
                 <button class="nav-btn active" onclick="showPage('my-habits')">My habits</button>
                 <button class="nav-btn" onclick="showPage('special-projects')">Special Projects</button>
