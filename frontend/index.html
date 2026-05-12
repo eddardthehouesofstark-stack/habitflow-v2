@@ -1228,6 +1228,127 @@
             transform: scale(0.95);
         }
 
+        /* Edit button */
+        .habit-edit {
+            font-size: 16px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            padding: 4px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            line-height: 1;
+            min-width: 32px;
+            min-height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .habit-edit:hover {
+            color: #fff;
+            background: rgba(74, 158, 255, 0.8);
+            border-color: #4a9eff;
+            transform: scale(1.05);
+        }
+
+        .habit-edit:active {
+            transform: scale(0.95);
+        }
+
+        /* Habit action buttons container */
+        .habit-actions {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        /* Edit mode styling */
+        .habit-item.editing {
+            background: rgba(74, 158, 255, 0.1);
+            border-color: rgba(74, 158, 255, 0.3);
+        }
+
+        .habit-item.editing .habit-check {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .habit-edit-form {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex: 1;
+        }
+
+        .habit-edit-input {
+            flex: 1;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 14px;
+            font-family: var(--sans);
+        }
+
+        .habit-edit-input:focus {
+            outline: none;
+            border-color: #4a9eff;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .habit-edit-time {
+            width: 90px;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 14px;
+            font-family: var(--sans);
+        }
+
+        .habit-edit-time:focus {
+            outline: none;
+            border-color: #4a9eff;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .habit-save-btn,
+        .habit-cancel-btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+            font-family: var(--sans);
+        }
+
+        .habit-save-btn {
+            background: #4a9eff;
+            color: #fff;
+        }
+
+        .habit-save-btn:hover {
+            background: #357abd;
+            transform: scale(1.05);
+        }
+
+        .habit-cancel-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .habit-cancel-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
         /* add habit form */
         .add-habit-form {
             display: flex;
@@ -2834,6 +2955,34 @@
                 font-size: 0.75rem;
             }
             
+            .habit-del,
+            .habit-edit {
+                min-width: 40px;
+                min-height: 40px;
+                font-size: 18px;
+            }
+
+            .habit-actions {
+                gap: 4px;
+            }
+
+            .habit-edit-input {
+                font-size: 13px;
+                padding: 6px 10px;
+            }
+
+            .habit-edit-time {
+                width: 80px;
+                font-size: 13px;
+                padding: 6px 8px;
+            }
+
+            .habit-save-btn,
+            .habit-cancel-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
             .year-section {
                 padding: 16px;
             }
@@ -4008,6 +4157,56 @@
             }, 100);
         }
 
+        function editHabit(e, id) {
+            e.stopPropagation();
+            // Set editing flag on the habit
+            habits = habits.map(h => h.id === id ? { ...h, editing: true } : { ...h, editing: false });
+            renderHabits();
+        }
+
+        async function saveHabitEdit(e, id) {
+            e.stopPropagation();
+            
+            const nameInput = document.getElementById(`edit-name-${id}`);
+            const timeInput = document.getElementById(`edit-time-${id}`);
+            
+            const newName = nameInput.value.trim();
+            const newTime = timeInput.value;
+            
+            if (!newName) {
+                showToast('Habit name cannot be empty');
+                return;
+            }
+            
+            try {
+                const res = await authFetch(`/habits/${id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ name: newName, time: newTime })
+                });
+                
+                if (!res.ok) {
+                    throw new Error('Failed to update habit');
+                }
+                
+                const data = await res.json();
+                
+                // Update local state
+                habits = habits.map(h => h.id === id ? { ...h, name: newName, time: newTime, editing: false } : h);
+                renderHabits();
+                showToast('Habit updated!');
+            } catch (err) {
+                console.error('Error updating habit:', err);
+                showToast('Failed to update habit');
+            }
+        }
+
+        function cancelHabitEdit(e, id) {
+            e.stopPropagation();
+            // Remove editing flag
+            habits = habits.map(h => h.id === id ? { ...h, editing: false } : h);
+            renderHabits();
+        }
+
         function showPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -4035,16 +4234,50 @@
                 list.innerHTML = '<div style="padding:20px;color:var(--muted);font-size:14px;text-align:center">No habits yet — add one below!</div>';
                 return;
             }
-            list.innerHTML = habits.map(h => `
-      <div class="habit-item ${h.done ? 'done' : ''}" onclick="toggleHabit('${h.id}', ${h.done})">
-        <div class="habit-check">${h.done ? '✓' : ''}</div>
-        <div class="habit-info">
-          <div class="habit-name">${escHtml(h.name)}</div>
-          ${h.time ? `<div class="habit-time">${h.time}</div>` : ''}
-        </div>
-        <button class="habit-del" onclick="deleteHabit(event,'${h.id}')">×</button>
-      </div>
-    `).join('');
+            list.innerHTML = habits.map(h => {
+                if (h.editing) {
+                    // Edit mode
+                    return `
+                        <div class="habit-item editing">
+                            <div class="habit-check">${h.done ? '✓' : ''}</div>
+                            <div class="habit-edit-form">
+                                <input 
+                                    type="text" 
+                                    class="habit-edit-input" 
+                                    id="edit-name-${h.id}" 
+                                    value="${escHtml(h.name)}"
+                                    placeholder="Habit name"
+                                />
+                                <input 
+                                    type="time" 
+                                    class="habit-edit-time" 
+                                    id="edit-time-${h.id}" 
+                                    value="${h.time || ''}"
+                                />
+                            </div>
+                            <div class="habit-actions">
+                                <button class="habit-save-btn" onclick="saveHabitEdit(event, '${h.id}')">Save</button>
+                                <button class="habit-cancel-btn" onclick="cancelHabitEdit(event, '${h.id}')">Cancel</button>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Normal mode
+                    return `
+                        <div class="habit-item ${h.done ? 'done' : ''}" onclick="toggleHabit('${h.id}', ${h.done})">
+                            <div class="habit-check">${h.done ? '✓' : ''}</div>
+                            <div class="habit-info">
+                                <div class="habit-name">${escHtml(h.name)}</div>
+                                ${h.time ? `<div class="habit-time">${h.time}</div>` : ''}
+                            </div>
+                            <div class="habit-actions">
+                                <button class="habit-edit" onclick="editHabit(event, '${h.id}')" title="Edit habit">✏️</button>
+                                <button class="habit-del" onclick="deleteHabit(event,'${h.id}')" title="Delete habit">×</button>
+                            </div>
+                        </div>
+                    `;
+                }
+            }).join('');
         }
 
         function updateStats() {

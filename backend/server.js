@@ -194,6 +194,29 @@ app.delete('/api/habits/:id', authGuard, async (req, res) => {
     res.json({ ok: true });
 });
 
+// PUT /api/habits/:id — update habit name and time
+app.put('/api/habits/:id', authGuard, async (req, res) => {
+    const { id } = req.params;
+    const { name, time } = req.body;
+    
+    if (!name || !name.trim()) {
+        return res.status(400).json({ error: 'Habit name is required' });
+    }
+    
+    const { data, error } = await supabase
+        .from('habits')
+        .update({ name: name.trim(), time: time || null })
+        .eq('id', id)
+        .eq('user_id', req.user.id)
+        .select()
+        .single();
+    
+    if (error) return res.status(500).json({ error: error.message });
+    if (!data) return res.status(404).json({ error: 'Habit not found' });
+    
+    res.json({ habit: data });
+});
+
 // GET /api/habits/logs/year  — return this year's log summary
 app.get('/api/habits/logs/year', authGuard, async (req, res) => {
     const year = new Date().getFullYear();
