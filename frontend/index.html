@@ -3887,6 +3887,7 @@
 
     <script>
         // Use config.js for API URL (auto-detects dev/prod)
+        // HabitFlow App v2.1.0 - Edit functionality added
         const API = window.HABITFLOW_CONFIG?.API_BASE_URL || 'https://habitflow-v2-backend.onrender.com/api';
         let token = localStorage.getItem('hf_token') || null;
         let currentUser = null;
@@ -4159,8 +4160,10 @@
 
         function editHabit(e, id) {
             e.stopPropagation();
+            console.log('Edit habit clicked:', id);
             // Set editing flag on the habit
             habits = habits.map(h => h.id === id ? { ...h, editing: true } : { ...h, editing: false });
+            console.log('Habits after edit:', habits);
             renderHabits();
         }
 
