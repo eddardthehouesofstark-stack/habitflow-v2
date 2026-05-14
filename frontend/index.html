@@ -723,6 +723,10 @@
             gap: 8px;
         }
 
+        .user-chip span {
+            white-space: nowrap;
+        }
+
         .avatar-sm {
             width: 30px;
             height: 30px;
@@ -3001,6 +3005,15 @@
                 gap: 8px;
             }
 
+            /* Hide username text on mobile, keep avatar only */
+            .user-chip span {
+                display: none;
+            }
+
+            .user-chip {
+                gap: 0;
+            }
+
             .social-links {
                 display: none; /* Hide social links on mobile to save space */
             }
@@ -3246,6 +3259,15 @@
                 white-space: nowrap;
             }
 
+            /* Hide username text on mobile, keep avatar only */
+            .user-chip span {
+                display: none;
+            }
+
+            .user-chip {
+                gap: 0;
+            }
+
             /* Fix all text overflow */
             #greeting, .page-header h1, .page-header h2 {
                 word-break: break-word;
@@ -3316,6 +3338,15 @@
             .topbar-right {
                 flex-shrink: 0;
                 gap: 4px;
+            }
+
+            /* Hide username text on mobile, keep avatar only */
+            .user-chip span {
+                display: none;
+            }
+
+            .user-chip {
+                gap: 0;
             }
             
             .page {
