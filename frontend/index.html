@@ -2944,33 +2944,71 @@
         
         /* Tablet (768px and below) */
         @media (max-width: 768px) {
+            /* Fix horizontal overflow on mobile */
+            html, body {
+                overflow-x: hidden;
+                max-width: 100vw;
+            }
+
+            #app-page, #auth-page {
+                overflow-x: hidden;
+                max-width: 100vw;
+            }
+
             .topbar {
-                padding: 0 20px;
-                flex-wrap: wrap;
+                padding: 0 16px;
+                flex-wrap: nowrap;
+                overflow-x: hidden;
             }
 
             .topbar-brand img {
-                height: 36px;
+                height: 32px;
+                flex-shrink: 0;
             }
 
             .auth-brand img {
                 height: 50px;
             }
-            
-            .topbar nav {
-                order: 3;
-                width: 100%;
-                margin-top: 10px;
-                justify-content: center;
+
+            /* Make navigation horizontally scrollable on mobile */
+            .topbar-nav {
+                overflow-x: auto;
+                overflow-y: hidden;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none; /* IE/Edge */
+                flex-wrap: nowrap;
+                gap: 6px;
+                padding: 0 8px;
+                margin: 0 8px;
+                max-width: calc(100vw - 200px); /* Account for logo and profile */
             }
-            
-            .topbar nav a {
-                font-size: 0.85rem;
-                padding: 8px 12px;
+
+            /* Hide scrollbar but keep functionality */
+            .topbar-nav::-webkit-scrollbar {
+                display: none;
+            }
+
+            .nav-btn {
+                flex-shrink: 0;
+                white-space: nowrap;
+                font-size: 13px;
+                padding: 6px 14px;
+            }
+
+            .topbar-right {
+                flex-shrink: 0;
+                gap: 8px;
+            }
+
+            .social-links {
+                display: none; /* Hide social links on mobile to save space */
             }
             
             .page {
                 padding: 20px 16px;
+                overflow-x: hidden;
+                max-width: 100vw;
             }
             
             .page-header h1 {
@@ -2994,12 +3032,36 @@
                 width: 8px;
                 height: 8px;
             }
+
+            /* Fix project cards overflow */
+            .project-card, .milestone-card {
+                max-width: 100%;
+                overflow: hidden;
+            }
+
+            /* Fix habit cards */
+            .habit-wrapper {
+                max-width: 100%;
+                overflow: visible;
+            }
+
+            .habit-item {
+                max-width: calc(100vw - 120px); /* Account for external buttons */
+                overflow: hidden;
+            }
         }
 
         /* Mobile (720px and below) */
         @media (max-width: 720px) {
+            /* Prevent horizontal overflow */
+            html, body {
+                overflow-x: hidden !important;
+                max-width: 100vw;
+            }
+
             #auth-page {
                 grid-template-columns: 1fr;
+                overflow-x: hidden;
             }
 
             .auth-left {
@@ -3007,21 +3069,26 @@
             }
 
             .auth-right {
-                padding: 40px 24px;
+                padding: 40px 20px;
+                max-width: 100vw;
+                overflow-x: hidden;
             }
 
             .page {
-                padding: 24px 16px;
+                padding: 20px 12px;
+                overflow-x: hidden;
+                max-width: 100vw;
             }
 
             .topbar {
-                padding: 0 16px;
+                padding: 0 12px;
                 height: auto;
-                min-height: 60px;
+                min-height: 56px;
+                overflow-x: hidden;
             }
             
             .topbar-brand img {
-                height: 32px;
+                height: 28px;
             }
 
             .auth-brand img {
@@ -3070,16 +3137,22 @@
                 font-size: 0.9rem;
             }
             
-            .habit-item {
-                padding: 14px;
-            }
-            
             .habit-wrapper {
                 gap: 8px;
+                max-width: 100%;
+                overflow: visible;
+            }
+
+            .habit-item {
+                padding: 14px 12px;
+                max-width: calc(100vw - 110px);
+                overflow: hidden;
             }
 
             .habit-item .habit-name {
                 font-size: 0.95rem;
+                word-break: break-word;
+                overflow-wrap: break-word;
             }
             
             .habit-item .habit-time {
@@ -3122,15 +3195,25 @@
             
             .year-grid {
                 gap: 1.5px;
+                max-width: 100%;
+                overflow-x: hidden;
             }
             
-            .year-day {
+            .year-day, .yd {
                 width: 6px;
                 height: 6px;
             }
+
+            .year-section {
+                overflow-x: hidden;
+                max-width: 100%;
+            }
             
-            .project-card {
+            .project-card, .milestone-card {
                 padding: 16px;
+                max-width: 100%;
+                overflow: hidden;
+                word-wrap: break-word;
             }
             
             .social-links {
@@ -3142,43 +3225,108 @@
                 height: 35px;
                 font-size: 1.1rem;
             }
+
+            /* Navigation scrolling */
+            .topbar-nav {
+                max-width: calc(100vw - 160px);
+                overflow-x: auto;
+                overflow-y: hidden;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                flex-wrap: nowrap;
+            }
+
+            .topbar-nav::-webkit-scrollbar {
+                display: none;
+            }
+
+            .nav-btn {
+                flex-shrink: 0;
+                white-space: nowrap;
+            }
+
+            /* Fix all text overflow */
+            #greeting, .page-header h1, .page-header h2 {
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+
+            /* Ensure containers fit */
+            .habits-section, .stats-row, .add-habit-form {
+                max-width: 100%;
+                overflow-x: hidden;
+            }
         }
         
         /* Small Mobile (480px and below) */
         @media (max-width: 480px) {
+            /* Strict overflow control */
+            html, body {
+                overflow-x: hidden !important;
+                max-width: 100vw !important;
+            }
+
+            * {
+                max-width: 100%;
+            }
+
             .topbar {
-                flex-direction: column;
-                padding: 12px 16px;
-                gap: 10px;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                padding: 10px 12px;
+                gap: 8px;
+                overflow-x: hidden;
+            }
+            
+            .topbar-brand img {
+                height: 26px;
             }
             
             .topbar-logo {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
             
-            .topbar nav {
-                width: 100%;
-                justify-content: space-around;
-                margin-top: 0;
+            .topbar-nav {
+                max-width: calc(100vw - 140px);
+                overflow-x: auto;
+                overflow-y: hidden;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                flex-wrap: nowrap;
+                gap: 4px;
+            }
+
+            .topbar-nav::-webkit-scrollbar {
+                display: none;
             }
             
-            .topbar nav a {
-                font-size: 0.75rem;
-                padding: 6px 8px;
-            }
+            .nav-btn {
+                flex-shrink: 0;
+                white-space: nowrap;
+                font-size: 11px;
+                padding: 4px 10px;
             
             .user-menu {
-                position: absolute;
-                top: 12px;
-                right: 16px;
+                position: relative;
+                flex-shrink: 0;
+            }
+
+            .topbar-right {
+                flex-shrink: 0;
+                gap: 4px;
             }
             
             .page {
-                padding: 16px 12px;
+                padding: 16px 10px;
+                overflow-x: hidden;
+                max-width: 100vw;
             }
             
-            .page-header h1 {
-                font-size: 1.5rem;
+            .page-header h1, #greeting {
+                font-size: 1.4rem !important;
+                word-break: break-word;
             }
             
             .page-header .date {
@@ -3188,10 +3336,12 @@
             .stats-row {
                 grid-template-columns: 1fr;
                 gap: 10px;
+                max-width: 100%;
             }
             
             .stat-card {
                 padding: 16px;
+                max-width: 100%;
             }
             
             .stat-card .value {
@@ -3200,6 +3350,8 @@
             
             .year-section {
                 padding: 12px;
+                overflow-x: hidden;
+                max-width: 100%;
             }
             
             .year-section h3 {
@@ -3216,11 +3368,20 @@
                 height: 4px;
             }
             
+            .habit-wrapper {
+                max-width: 100%;
+                gap: 6px;
+            }
+
             .habit-item {
-                padding: 12px;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
+                padding: 12px 10px;
+                max-width: calc(100vw - 100px);
+                overflow: hidden;
+            }
+
+            .habit-item .habit-name {
+                word-break: break-word;
+                overflow-wrap: break-word;
             }
             
             .habit-left {
@@ -3231,18 +3392,35 @@
                 width: 100%;
                 justify-content: space-between;
             }
-            
-            .new-habit-form {
-                flex-direction: column;
-                gap: 10px;
+
+            .habit-actions-external {
+                flex-shrink: 0;
             }
             
-            .new-habit-form input {
+            .new-habit-form, .add-habit-form {
+                flex-direction: column;
+                gap: 10px;
+                max-width: 100%;
+            }
+            
+            .new-habit-form input, .add-habit-form input {
                 width: 100%;
+                max-width: 100%;
             }
             
             .new-habit-form button {
                 width: 100%;
+            }
+
+            /* Fix all cards */
+            .project-card, .milestone-card, .feature-card {
+                max-width: 100%;
+                padding: 14px;
+                overflow: hidden;
+            }
+
+            .project-card h3, .milestone-card h3 {
+                word-break: break-word;
             }
             
             .auth-form input {
