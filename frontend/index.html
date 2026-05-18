@@ -5532,6 +5532,8 @@
         async function createProject(e) {
             e.preventDefault();
             
+            console.log('Creating project...');
+            
             const name = document.getElementById('project-name').value.trim();
             const description = document.getElementById('project-description').value.trim();
             const start_date = document.getElementById('project-start-date').value;
@@ -5539,29 +5541,38 @@
             const category = document.getElementById('project-category').value;
             const accent_color = selectedColor;
 
+            console.log('Form data:', { name, description, start_date, end_date, category, accent_color });
+
             if (!name || !start_date || !end_date || !category) {
                 showToast('Please fill in all required fields');
+                console.error('Missing required fields');
                 return;
             }
 
             // Validate dates
             if (new Date(end_date) <= new Date(start_date)) {
                 showToast('End date must be after start date');
+                console.error('Invalid date range');
                 return;
             }
 
             try {
+                console.log('Sending request to:', API + '/projects');
                 const res = await authFetch('/projects', {
                     method: 'POST',
                     body: JSON.stringify({ name, description, start_date, end_date, category, accent_color })
                 });
 
+                console.log('Response status:', res.status);
+
                 if (!res.ok) {
                     const data = await res.json();
+                    console.error('Server error:', data);
                     throw new Error(data.error || 'Failed to create project');
                 }
 
                 const data = await res.json();
+                console.log('Project created:', data);
                 activeProjects.unshift(data.project);
                 renderActiveProjects();
                 closeProjectModal();
