@@ -304,6 +304,145 @@ app.get('/api/community', authGuard, async (req, res) => {
     res.json({ users: others });
 });
 
+// ─── PROJECTS ROUTES ───
+
+// GET /api/projects — get all projects (active and completed)
+app.get('/api/projects', authGuard, async (req, res) => {
+    try {
+        const { data: projects, error } = await supabase
+            .from('projects')
+            .select('*')
+            .eq('user_id', req.user.id)
+            .order('created_at', { ascending: false });
+
+        if (error) return res.status(500).json({ error: error.message });
+
+        // Separate active and completed
+        const active = projects.filter(p => !p.completed_at);
+        const completed = projects.filter(p => p.completed_at);
+
+        res.json({ active, completed });
+    } catch (error) {
+        console.error('Get projects error:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// POST /api/projects — create new project
+app.post('/api/projects', authGuard, async (req, res) => {
+    try {
+        const { name, description, start_date, end_date, category, accent_color } = req.body;
+
+        if (!name || !start_date || !end_date || !category) {
+            return res.status(400).json({ error: 'Name, start date, end date, and category are required' });
+        }
+
+        // Validate dates
+        if (new Date(end_date) <= new Date(start_date)) {
+            return res.status(400).json({ error: 'End date must be after start date' });
+        }
+
+        const { data: project, error } = await supabase
+            .from('projects')
+            .insert({
+                user_id: req.user.id,
+                name: name.trim(),
+                description: description?.trim() || null,
+                start_date,
+                end_date,
+                category,
+                accent_color: accent_color || '#7F77DD'
+            })
+            .select()
+            .single();
+
+        if (error) return res.status(500).json({ error: error.message });
+
+        res.json({ project });
+    } catch (error) {
+        console.error('Create project error:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// PUT /api/projects/:id — update project
+app.put('/api/projects/:id', authGuard, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, description, start_date, end_date, category, accent_color } = req.body;
+
+        const updateData = { updated_at: new Date().toISOString() };
+        if (name) updateData.name = name.trim();
+        if (description !== undefined) updateData.description = description?.trim() || null;
+        if (start_date) updateData.start_date = start_date;
+        if (end_date) updateData.end_date = end_date;
+        if (category) updateData.category = category;
+        if (accent_color) updateData.accent_color = accent_color;
+
+        const { data: project, error } = await supabase
+            .from('projects')
+            .update(updateData)
+            .eq('id', id)
+            .eq('user_id', req.user.id)
+            .select()
+            .single();
+
+        if (error) return res.status(500).json({ error: error.message });
+        if (!project) return res.status(404).json({ error: 'Project not found' });
+
+        res.json({ project });
+    } catch (error) {
+        console.error('Update project error:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// PATCH /api/projects/:id/complete — mark project as complete
+app.patch('/api/projects/:id/complete', authGuard, async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const { data: project, error } = await supabase
+            .from('projects')
+            .update({ 
+                completed_at: new Date().toISOString(),
+                updated_at: new Date().toISOString()
+            })
+            .eq('id', id)
+            .eq('user_id', req.user.id)
+            .select()
+            .single();
+
+        if (error) return res.status(500).json({ error: error.message });
+        if (!project) return res.status(404).json({ error: 'Project not found' });
+
+        res.json({ project });
+    } catch (error) {
+        console.error('Complete project error:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// DELETE /api/projects/:id — delete project permanently
+app.delete('/api/projects/:id', authGuard, async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const { error } = await supabase
+            .from('projects')
+            .delete()
+            .eq('id', id)
+            .eq('user_id', req.user.id);
+
+        if (error) return res.status(500).json({ error: error.message });
+
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Delete project error:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
 // ─── START ───
 app.listen(PORT, () => console.log(`HabitFlow backend running on http://localhost:${PORT}`));
 

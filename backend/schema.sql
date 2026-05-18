@@ -84,3 +84,30 @@ alter table users add column if not exists is_admin boolean default false;
 
 -- Set your email as admin (REPLACE WITH YOUR EMAIL)
 update users set is_admin = true where email = 'eddardthehouesofstatk@gmail.com';
+
+-- ═══════════════════════════════════════════════
+--  8. SPECIAL PROJECTS TABLE
+--  For time-limited projects with deadlines
+-- ═══════════════════════════════════════════════
+
+create table if not exists projects (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references users(id) on delete cascade not null,
+  name text not null,
+  description text,
+  start_date date not null,
+  end_date date not null,
+  category text not null,  -- Personal, Work, Learning, Health, Creative, Finance, Other
+  accent_color text not null default '#7F77DD',
+  completed_at timestamptz,  -- null = active, set = completed
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+-- Indexes for projects
+create index if not exists idx_projects_user_id on projects(user_id);
+create index if not exists idx_projects_completed on projects(completed_at);
+create index if not exists idx_projects_end_date on projects(end_date);
+
+-- Enable RLS for projects
+alter table projects enable row level security;

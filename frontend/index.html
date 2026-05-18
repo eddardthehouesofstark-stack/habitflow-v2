@@ -2586,6 +2586,230 @@
             box-shadow: 0 8px 28px rgba(74, 158, 255, 0.5);
         }
 
+        /* Color Picker */
+        .color-picker {
+            display: flex;
+            gap: 12px;
+            padding: 8px 0;
+        }
+
+        .color-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+            position: relative;
+        }
+
+        .color-dot:hover {
+            transform: scale(1.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .color-dot.selected {
+            border-color: #fff;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+            transform: scale(1.2);
+        }
+
+        /* Modal Form Row */
+        .modal-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .modal-form-group select {
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            color: #fff;
+            font-family: var(--sans);
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .modal-form-group select:focus {
+            border-color: #4a9eff;
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 0 4px rgba(74, 158, 255, 0.15);
+        }
+
+        .modal-form-group select option {
+            background: #1a1a2e;
+            color: #fff;
+        }
+
+        /* Project Card Styles */
+        .project-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            gap: 12px;
+        }
+
+        .project-card-title {
+            font-family: var(--serif);
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.3;
+            flex: 1;
+        }
+
+        .project-category-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .project-card-description {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .project-card-dates {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 12px;
+        }
+
+        .project-countdown {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .countdown-safe {
+            background: rgba(74, 222, 128, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(74, 222, 128, 0.3);
+        }
+
+        .countdown-warning {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .countdown-danger {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .project-card-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .btn-complete-project {
+            flex: 1;
+            padding: 10px 16px;
+            background: rgba(74, 222, 128, 0.15);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            border-radius: 8px;
+            color: #4ade80;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn-complete-project:hover {
+            background: rgba(74, 222, 128, 0.25);
+            border-color: rgba(74, 222, 128, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3);
+        }
+
+        .btn-delete-project-icon {
+            width: 38px;
+            height: 38px;
+            padding: 0;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 8px;
+            color: #ef4444;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .btn-delete-project-icon:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+
+        /* Completed Project Card */
+        .completed-project-card {
+            opacity: 0.8;
+        }
+
+        .project-completed-badge {
+            padding: 4px 12px;
+            background: rgba(74, 222, 128, 0.15);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #4ade80;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+
+        .project-card-completion {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 16px;
+        }
+
+        /* Active Project Card */
+        .active-project-card {
+            padding: 24px;
+        }
+
+        .completed-project-card {
+            padding: 24px;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            margin-bottom: 48px;
+        }
+
+        .projects-section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
         /* ─── PROJECT DETAIL PAGE ─── */
         .project-detail-header {
             background: rgba(255, 255, 255, 0.05);
@@ -3774,15 +3998,39 @@
         <!-- SPECIAL PROJECTS -->
         <div class="page" id="page-special-projects">
             <div class="page-header">
-                <h2>Special Projects</h2>
-                <p>Track your important projects and activities.</p>
+                <h2 style="font-family: 'Playfair Display', serif; font-weight: 700; position: relative; display: inline-block;">
+                    Special Projects
+                    <span style="position: absolute; bottom: -8px; left: 0; width: 60px; height: 3px; background: #7F77DD;"></span>
+                </h2>
+                <p>Track time-limited projects with deadlines and countdowns.</p>
             </div>
             
-            <div class="projects-grid" id="projects-grid">
-                <!-- Add New Project Card -->
-                <div class="add-project-card" onclick="openProjectModal()">
-                    <div class="add-project-icon">➕</div>
-                    <div class="add-project-text">Add New Project</div>
+            <!-- Active Projects Section -->
+            <div class="projects-section">
+                <div class="projects-section-header">
+                    <span style="font-size: 11px; font-weight: 600; letter-spacing: 1.5px; color: rgba(255,255,255,0.4); text-transform: uppercase;">Active Projects</span>
+                    <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.1); margin-left: 16px;"></div>
+                </div>
+                <div class="projects-grid" id="active-projects-grid">
+                    <!-- Add New Project Card -->
+                    <div class="add-project-card" onclick="openProjectModal()">
+                        <div class="add-project-icon">➕</div>
+                        <div class="add-project-text">Add New Project</div>
+                    </div>
+                    <!-- Active project cards will be rendered here -->
+                </div>
+            </div>
+
+            <!-- Completed Projects Section -->
+            <div class="projects-section" style="margin-top: 48px;">
+                <div class="projects-section-header">
+                    <span style="font-size: 11px; font-weight: 600; letter-spacing: 1.5px; color: rgba(255,255,255,0.4); text-transform: uppercase;">Completed Projects</span>
+                    <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.1); margin-left: 16px;"></div>
+                </div>
+                <div class="projects-grid" id="completed-projects-grid">
+                    <div style="padding: 40px 20px; color: rgba(255,255,255,0.4); font-size: 14px; text-align: center; grid-column: 1 / -1;">
+                        No completed projects yet.
+                    </div>
                 </div>
             </div>
         </div>
@@ -4171,60 +4419,57 @@
     <!-- Project Modal -->
     <div class="modal" id="project-modal">
         <div class="modal-content">
-            <h3 class="modal-header">Create New Project</h3>
+            <h3 class="modal-header">Add New Project</h3>
             <form class="modal-form" onsubmit="createProject(event)">
                 <div class="modal-form-group">
-                    <label>Project Name</label>
-                    <input type="text" id="project-title" placeholder="e.g. Launch New Website" required />
+                    <label>Project Name <span style="color: #ff6b6b;">*</span></label>
+                    <input type="text" id="project-name" placeholder="e.g. Launch blog redesign" maxlength="60" required />
                 </div>
                 <div class="modal-form-group">
                     <label>Description (Optional)</label>
-                    <textarea id="project-description" placeholder="Describe your project..."></textarea>
+                    <textarea id="project-description" rows="3" placeholder="Describe your project..."></textarea>
+                </div>
+                <div class="modal-form-row">
+                    <div class="modal-form-group">
+                        <label>Start Date <span style="color: #ff6b6b;">*</span></label>
+                        <input type="date" id="project-start-date" required />
+                    </div>
+                    <div class="modal-form-group">
+                        <label>Deadline <span style="color: #ff6b6b;">*</span></label>
+                        <input type="date" id="project-end-date" required />
+                    </div>
                 </div>
                 <div class="modal-form-group">
-                    <label>Number of Days</label>
-                    <input type="number" id="project-days" placeholder="30" min="1" required />
+                    <label>Category Tag <span style="color: #ff6b6b;">*</span></label>
+                    <select id="project-category" required>
+                        <option value="">Select a category</option>
+                        <option value="Personal">Personal</option>
+                        <option value="Work">Work</option>
+                        <option value="Learning">Learning</option>
+                        <option value="Health">Health</option>
+                        <option value="Creative">Creative</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="modal-form-group">
+                    <label>Accent Color <span style="color: #ff6b6b;">*</span></label>
+                    <div class="color-picker">
+                        <div class="color-dot" data-color="#7F77DD" style="background: #7F77DD;" onclick="selectColor('#7F77DD')"></div>
+                        <div class="color-dot" data-color="#4ade80" style="background: #4ade80;" onclick="selectColor('#4ade80')"></div>
+                        <div class="color-dot" data-color="#3b82f6" style="background: #3b82f6;" onclick="selectColor('#3b82f6')"></div>
+                        <div class="color-dot" data-color="#ec4899" style="background: #ec4899;" onclick="selectColor('#ec4899')"></div>
+                        <div class="color-dot" data-color="#f59e0b" style="background: #f59e0b;" onclick="selectColor('#f59e0b')"></div>
+                        <div class="color-dot" data-color="#f97316" style="background: #f97316;" onclick="selectColor('#f97316')"></div>
+                        <div class="color-dot" data-color="#6b7280" style="background: #6b7280;" onclick="selectColor('#6b7280')"></div>
+                    </div>
+                    <input type="hidden" id="project-color" value="#7F77DD" />
                 </div>
                 <div class="modal-actions">
                     <button type="button" class="btn-modal cancel" onclick="closeProjectModal()">Cancel</button>
                     <button type="submit" class="btn-modal submit">Create Project</button>
                 </div>
             </form>
-        </div>
-    </div>
-
-    <!-- Schedule Modal -->
-    <div class="modal" id="schedule-modal">
-        <div class="modal-content">
-            <h3 class="modal-header">Create Schedule</h3>
-            <p style="text-align: center; color: rgba(255, 255, 255, 0.6); margin-bottom: 24px; font-size: 14px;">
-                Add daily tasks and milestones for <span id="schedule-project-name" style="color: #4a9eff; font-weight: 600;"></span>
-            </p>
-            <form class="modal-form" onsubmit="createSchedule(event)">
-                <div class="modal-form-group">
-                    <label>Task Name</label>
-                    <input type="text" id="schedule-task" placeholder="e.g. Complete homepage design" required />
-                </div>
-                <div class="modal-form-group">
-                    <label>Task Time (Optional)</label>
-                    <input type="time" id="schedule-time" />
-                </div>
-                <div class="modal-form-group">
-                    <label>Priority</label>
-                    <select id="schedule-priority" style="padding: 14px 18px; background: rgba(255, 255, 255, 0.08); border: 1.5px solid rgba(255, 255, 255, 0.15); border-radius: 12px; color: #fff; font-family: var(--sans); font-size: 15px; outline: none; width: 100%;">
-                        <option value="high" style="background: #1a1a2e; color: #fff;">High Priority</option>
-                        <option value="medium" selected style="background: #1a1a2e; color: #fff;">Medium Priority</option>
-                        <option value="low" style="background: #1a1a2e; color: #fff;">Low Priority</option>
-                    </select>
-                </div>
-                <div class="modal-actions">
-                    <button type="button" class="btn-modal cancel" onclick="closeScheduleModal()">Cancel</button>
-                    <button type="submit" class="btn-modal submit">Add Task</button>
-                </div>
-            </form>
-            <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-                <button class="btn-modal submit" onclick="finishSchedule()" style="width: 100%;">Finish & View Project</button>
-            </div>
         </div>
     </div>
 
@@ -4494,6 +4739,7 @@
             
             loadHabits();
             buildYearGrid();
+            loadProjects(); // Load special projects
             
             // Initialize Vanta Birds animation
             setTimeout(() => {
@@ -5077,6 +5323,309 @@
             } catch (err) {
                 console.error('Delete user error:', err);
                 showToast('Failed to delete user: ' + err.message);
+            }
+        }
+
+        // ─── SPECIAL PROJECTS ───
+        let activeProjects = [];
+        let completedProjects = [];
+        let selectedColor = '#7F77DD';
+        let countdownInterval = null;
+
+        // Load all projects from backend
+        async function loadProjects() {
+            try {
+                const res = await authFetch('/projects');
+                if (!res.ok) throw new Error('Failed to load projects');
+                
+                const data = await res.json();
+                activeProjects = data.active || [];
+                completedProjects = data.completed || [];
+                
+                renderProjectCards();
+                startCountdownTimer();
+            } catch (err) {
+                console.error('Load projects error:', err);
+                showToast('Failed to load projects');
+            }
+        }
+
+        // Render project cards
+        function renderProjectCards() {
+            renderActiveProjects();
+            renderCompletedProjects();
+        }
+
+        // Render active projects
+        function renderActiveProjects() {
+            const grid = document.getElementById('active-projects-grid');
+            if (!grid) return;
+
+            // Keep the "Add New Project" card
+            const addCard = grid.querySelector('.add-project-card');
+            grid.innerHTML = '';
+            if (addCard) grid.appendChild(addCard);
+
+            if (activeProjects.length === 0) {
+                return; // Just show the add card
+            }
+
+            activeProjects.forEach(project => {
+                const card = createActiveProjectCard(project);
+                grid.appendChild(card);
+            });
+        }
+
+        // Render completed projects
+        function renderCompletedProjects() {
+            const grid = document.getElementById('completed-projects-grid');
+            if (!grid) return;
+
+            if (completedProjects.length === 0) {
+                grid.innerHTML = '<div style="padding: 40px 20px; color: rgba(255,255,255,0.4); font-size: 14px; text-align: center; grid-column: 1 / -1;">No completed projects yet.</div>';
+                return;
+            }
+
+            grid.innerHTML = '';
+            completedProjects.forEach(project => {
+                const card = createCompletedProjectCard(project);
+                grid.appendChild(card);
+            });
+        }
+
+        // Create active project card
+        function createActiveProjectCard(project) {
+            const card = document.createElement('div');
+            card.className = 'project-card active-project-card';
+            card.style.borderTop = `3px solid ${project.accent_color}`;
+
+            const countdown = calculateCountdown(project.end_date);
+            const countdownClass = countdown.days > 7 ? 'countdown-safe' : countdown.days >= 0 ? 'countdown-warning' : 'countdown-danger';
+            const countdownText = countdown.days < 0 ? `${Math.abs(countdown.days)} days overdue` : countdown.days === 0 ? 'Due today' : `${countdown.days} days left`;
+
+            card.innerHTML = `
+                <div class="project-card-header">
+                    <div class="project-card-title">${escHtml(project.name)}</div>
+                    <span class="project-category-badge" style="background: rgba(74, 158, 255, 0.15); color: #4a9eff;">${escHtml(project.category)}</span>
+                </div>
+                ${project.description ? `<div class="project-card-description">${escHtml(project.description)}</div>` : ''}
+                <div class="project-card-dates">
+                    ${formatProjectDate(project.start_date)} → ${formatProjectDate(project.end_date)}
+                </div>
+                <div class="project-countdown ${countdownClass}">
+                    ${countdownText}
+                </div>
+                <div class="project-card-actions">
+                    <button class="btn-complete-project" onclick="completeProject('${project.id}')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Complete
+                    </button>
+                    <button class="btn-delete-project-icon" onclick="deleteProject('${project.id}', false)" title="Delete Project">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                    </button>
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Create completed project card
+        function createCompletedProjectCard(project) {
+            const card = document.createElement('div');
+            card.className = 'project-card completed-project-card';
+            card.style.borderTop = `3px solid ${project.accent_color}`;
+            card.style.opacity = '0.8';
+
+            card.innerHTML = `
+                <div class="project-card-header">
+                    <div class="project-card-title">${escHtml(project.name)}</div>
+                    <span class="project-completed-badge">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Completed
+                    </span>
+                </div>
+                ${project.description ? `<div class="project-card-description">${escHtml(project.description)}</div>` : ''}
+                <div class="project-card-completion">
+                    Finished ${formatProjectDate(project.completed_at.split('T')[0])} · ${escHtml(project.category)}
+                </div>
+                <div class="project-card-actions">
+                    <button class="btn-delete-project-icon" onclick="deleteProject('${project.id}', true)" title="Delete Project">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                    </button>
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Calculate countdown
+        function calculateCountdown(endDate) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const end = new Date(endDate);
+            end.setHours(0, 0, 0, 0);
+            const diffTime = end - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return { days: diffDays };
+        }
+
+        // Format date for display
+        function formatProjectDate(dateStr) {
+            const date = new Date(dateStr);
+            const day = date.getDate();
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const month = months[date.getMonth()];
+            const year = date.getFullYear();
+            return `${day} ${month} ${year}`;
+        }
+
+        // Start countdown timer (updates every 60 seconds)
+        function startCountdownTimer() {
+            if (countdownInterval) clearInterval(countdownInterval);
+            countdownInterval = setInterval(() => {
+                renderActiveProjects();
+            }, 60000); // Update every minute
+        }
+
+        // Color picker
+        function selectColor(color) {
+            selectedColor = color;
+            document.getElementById('project-color').value = color;
+            
+            // Update visual selection
+            document.querySelectorAll('.color-dot').forEach(dot => {
+                dot.classList.remove('selected');
+            });
+            document.querySelector(`.color-dot[data-color="${color}"]`).classList.add('selected');
+        }
+
+        // Modal functions
+        function openProjectModal() {
+            // Set default start date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('project-start-date').value = today;
+            
+            // Set default end date to 30 days from now
+            const endDate = new Date();
+            endDate.setDate(endDate.getDate() + 30);
+            document.getElementById('project-end-date').value = endDate.toISOString().split('T')[0];
+            
+            // Reset color selection
+            selectedColor = '#7F77DD';
+            document.querySelectorAll('.color-dot').forEach(dot => dot.classList.remove('selected'));
+            document.querySelector('.color-dot[data-color="#7F77DD"]').classList.add('selected');
+            
+            document.getElementById('project-modal').classList.add('active');
+        }
+
+        function closeProjectModal() {
+            document.getElementById('project-modal').classList.remove('active');
+            document.getElementById('project-name').value = '';
+            document.getElementById('project-description').value = '';
+            document.getElementById('project-start-date').value = '';
+            document.getElementById('project-end-date').value = '';
+            document.getElementById('project-category').value = '';
+            document.getElementById('project-color').value = '#7F77DD';
+        }
+
+        // Create project
+        async function createProject(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('project-name').value.trim();
+            const description = document.getElementById('project-description').value.trim();
+            const start_date = document.getElementById('project-start-date').value;
+            const end_date = document.getElementById('project-end-date').value;
+            const category = document.getElementById('project-category').value;
+            const accent_color = selectedColor;
+
+            if (!name || !start_date || !end_date || !category) {
+                showToast('Please fill in all required fields');
+                return;
+            }
+
+            // Validate dates
+            if (new Date(end_date) <= new Date(start_date)) {
+                showToast('End date must be after start date');
+                return;
+            }
+
+            try {
+                const res = await authFetch('/projects', {
+                    method: 'POST',
+                    body: JSON.stringify({ name, description, start_date, end_date, category, accent_color })
+                });
+
+                if (!res.ok) {
+                    const data = await res.json();
+                    throw new Error(data.error || 'Failed to create project');
+                }
+
+                const data = await res.json();
+                activeProjects.unshift(data.project);
+                renderActiveProjects();
+                closeProjectModal();
+                showToast('Project created successfully! 🎉');
+            } catch (err) {
+                console.error('Create project error:', err);
+                showToast('Failed to create project: ' + err.message);
+            }
+        }
+
+        // Complete project
+        async function completeProject(projectId) {
+            if (!confirm('Mark this project as complete?')) return;
+
+            try {
+                const res = await authFetch(`/projects/${projectId}/complete`, {
+                    method: 'PATCH'
+                });
+
+                if (!res.ok) {
+                    const data = await res.json();
+                    throw new Error(data.error || 'Failed to complete project');
+                }
+
+                const data = await res.json();
+                
+                // Move from active to completed
+                activeProjects = activeProjects.filter(p => p.id !== projectId);
+                completedProjects.unshift(data.project);
+                
+                renderProjectCards();
+                showToast('Project completed! 🎉');
+            } catch (err) {
+                console.error('Complete project error:', err);
+                showToast('Failed to complete project: ' + err.message);
+            }
+        }
+
+        // Delete project
+        async function deleteProject(projectId, isCompleted) {
+            if (!confirm('Are you sure you want to delete this project? This action cannot be undone.')) return;
+
+            try {
+                const res = await authFetch(`/projects/${projectId}`, {
+                    method: 'DELETE'
+                });
+
+                if (!res.ok) {
+                    const data = await res.json();
+                    throw new Error(data.error || 'Failed to delete project');
+                }
+
+                // Remove from appropriate array
+                if (isCompleted) {
+                    completedProjects = completedProjects.filter(p => p.id !== projectId);
+                } else {
+                    activeProjects = activeProjects.filter(p => p.id !== projectId);
+                }
+                
+                renderProjectCards();
+                showToast('Project deleted successfully 🗑️');
+            } catch (err) {
+                console.error('Delete project error:', err);
+                showToast('Failed to delete project: ' + err.message);
             }
         }
 
